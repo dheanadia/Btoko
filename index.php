@@ -26,7 +26,7 @@
 	}
 	?>
 	<div id="footer">
-		Created by <a href="http://blog.chapagain.com.np" title="Mukesh Chapagain">Mukesh Chapagain</a>
+		Created by <a href="https://dewacoding.wordpress.com/about/" title="Kurnia Ramadhan Putra">Kurnia Ramadhan Putra</a>
 	</div>
 </body>
 </html>
