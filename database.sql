@@ -22,3 +22,4 @@ CREATE TABLE `products` (
   FOREIGN KEY (login_id) REFERENCES login(id)
   ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB;
+tokotoko

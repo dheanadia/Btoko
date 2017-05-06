@@ -10,26 +10,26 @@
 include("connection.php");
 
 if(isset($_POST['submit'])) {
-	$user = mysqli_real_escape_string($mysqli, $_POST['username']);
-	$pass = mysqli_real_escape_string($mysqli, $_POST['password']);
+	$id_karyawan = mysqli_real_escape_string($mysqli, $_POST['id_karyawan']);
+	$password = mysqli_real_escape_string($mysqli, $_POST['password']);
 
-	if($user == "" || $pass == "") {
+	if($id_karyawan == "" || $password == "") {
 		echo "Either username or password field is empty.";
 		echo "<br/>";
 		echo "<a href='login.php'>Go back</a>";
 	} else {
-		$result = mysqli_query($mysqli, "SELECT * FROM login WHERE username='$user' AND password=md5('$pass')")
+		$result = mysqli_query($mysqli, "SELECT * FROM karyawan WHERE id_karyawan='$id_karyawan' AND password='$password'")
 					or die("Could not execute the select query.");
 		
 		$row = mysqli_fetch_assoc($result);
 		
 		if(is_array($row) && !empty($row)) {
-			$validuser = $row['username'];
-			$_SESSION['valid'] = $validuser;
-			$_SESSION['name'] = $row['name'];
-			$_SESSION['id'] = $row['id'];
+			$valid_karyawan = $row['id_karyawan'];
+			$_SESSION['valid'] = $valid_karyawan;
+			$_SESSION['nama'] = $row['nama'];
+			$_SESSION['id_karyawan'] = $row['id_karyawan'];
 		} else {
-			echo "Invalid username or password.";
+			echo "Invalid id_karyawan or password.";
 			echo "<br/>";
 			echo "<a href='login.php'>Go back</a>";
 		}
@@ -44,8 +44,8 @@ if(isset($_POST['submit'])) {
 	<form name="form1" method="post" action="">
 		<table width="75%" border="0">
 			<tr> 
-				<td width="10%">Username</td>
-				<td><input type="text" name="username"></td>
+				<td width="10%">id_karyawan</td>
+				<td><input type="text" name="id_karyawan"></td>
 			</tr>
 			<tr> 
 				<td>Password</td>
