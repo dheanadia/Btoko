@@ -1,4 +1,5 @@
-<?php session_start(); ?>
+<?php session_id();
+session_start(); ?>
 
 <?php
 if(!isset($_SESSION['valid'])) {
@@ -12,11 +13,11 @@ include_once("connection.php");
 
 if(isset($_POST['update']))
 {	
-	$id = $_POST['id'];
+	$id = $_POST['kode_barang'];
 	
-	$name = $_POST['name'];
-	$qty = $_POST['qty'];
-	$price = $_POST['price'];	
+	$name = $_POST['nama_barang'];
+	$qty = $_POST['jumlah'];
+	$price = $_POST['harga'];	
 	
 	// checking empty fields
 	if(empty($name) || empty($qty) || empty($price)) {
@@ -34,7 +35,7 @@ if(isset($_POST['update']))
 		}		
 	} else {	
 		//updating the table
-		$result = mysqli_query($mysqli, "UPDATE products SET name='$name', qty='$qty', price='$price' WHERE id=$id");
+		$result = mysqli_query($mysqli, "UPDATE barang SET nama_barang='$name', jumlah='$qty', harga='$price' WHERE kode_barang=$id");
 		
 		//redirectig to the display page. In our case, it is view.php
 		header("Location: view.php");
@@ -46,13 +47,13 @@ if(isset($_POST['update']))
 $id = $_GET['id'];
 
 //selecting data associated with this particular id
-$result = mysqli_query($mysqli, "SELECT * FROM products WHERE id=$id");
+$result = mysqli_query($mysqli, "SELECT * FROM barang WHERE kode_barang='$id'");
 
 while($res = mysqli_fetch_array($result))
 {
-	$name = $res['name'];
-	$qty = $res['qty'];
-	$price = $res['price'];
+	$name = $res['nama_barang'];
+	$qty = $res['jumlah'];
+	$price = $res['harga'];
 }
 ?>
 <html>
@@ -68,18 +69,18 @@ while($res = mysqli_fetch_array($result))
 		<table border="0">
 			<tr> 
 				<td>Name</td>
-				<td><input type="text" name="name" value="<?php echo $name;?>"></td>
+				<td><input type="text" name="nama_barang" value="<?php echo $name;?>"></td>
 			</tr>
 			<tr> 
 				<td>Quantity</td>
-				<td><input type="text" name="qty" value="<?php echo $qty;?>"></td>
+				<td><input type="text" name="jumlah" value="<?php echo $qty;?>"></td>
 			</tr>
 			<tr> 
 				<td>Price</td>
-				<td><input type="text" name="price" value="<?php echo $price;?>"></td>
+				<td><input type="text" name="harga" value="<?php echo $price;?>"></td>
 			</tr>
 			<tr>
-				<td><input type="hidden" name="id" value=<?php echo $_GET['id'];?>></td>
+				<td><input type="hidden" name="kode_barang" value=<?php echo $id;?>></td>
 				<td><input type="submit" name="update" value="Update"></td>
 			</tr>
 		</table>
