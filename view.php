@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php session_id();
+session_start(); 
+
+?>
 
 <?php
 if(!isset($_SESSION['valid'])) {
@@ -11,7 +14,7 @@ if(!isset($_SESSION['valid'])) {
 include_once("connection.php");
 
 //fetching data in descending order (lastest entry first)
-$result = mysqli_query($mysqli, "SELECT * FROM products WHERE login_id=".$_SESSION['id']." ORDER BY id DESC");
+$result = mysqli_query($mysqli, "SELECT * FROM barang WHERE karyawan_id=".$_SESSION['id_karyawan']." ORDER BY kode_barang DESC");
 ?>
 
 <html>
@@ -33,9 +36,9 @@ $result = mysqli_query($mysqli, "SELECT * FROM products WHERE login_id=".$_SESSI
 		<?php
 		while($res = mysqli_fetch_array($result)) {		
 			echo "<tr>";
-			echo "<td>".$res['name']."</td>";
-			echo "<td>".$res['qty']."</td>";
-			echo "<td>".$res['price']."</td>";	
+			echo "<td>".$res['nama_barang']."</td>";
+			echo "<td>".$res['jumlah']."</td>";
+			echo "<td>".$res['harga']."</td>";	
 			echo "<td><a href=\"edit.php?id=$res[id]\">Edit</a> | <a href=\"delete.php?id=$res[id]\" onClick=\"return confirm('Are you sure you want to delete?')\">Delete</a></td>";		
 		}
 		?>

@@ -20,7 +20,7 @@ if(isset($_POST['Submit'])) {
 	$name = $_POST['name'];
 	$qty = $_POST['qty'];
 	$price = $_POST['price'];
-	$loginId = $_SESSION['id'];
+	$loginId = $_SESSION['id_karyawan'];
 		
 	// checking empty fields
 	if(empty($name) || empty($qty) || empty($price)) {
@@ -43,7 +43,7 @@ if(isset($_POST['Submit'])) {
 		// if all the fields are filled (not empty) 
 			
 		//insert data to database	
-		$result = mysqli_query($mysqli, "INSERT INTO products(name, qty, price, login_id) VALUES('$name','$qty','$price', '$loginId')");
+		$result = mysqli_query($mysqli, "INSERT INTO barang(nama_barang, jumlah, harga, karyawan_id) VALUES('$name','$qty','$price', '$loginId')");
 		
 		//display success message
 		echo "<font color='green'>Data added successfully.";
